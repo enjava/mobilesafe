@@ -49,6 +49,7 @@ public class SplashActivity extends Activity {
     private String versionCode;//版本号
     private String versionDes;//描述
 
+
     private static final int UPDATE_VERSION = 100;//更新新版本的状态码
 
     private static final int ENTER_HOME = 101;//进入应用程序主界面状态码
