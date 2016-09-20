@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+    <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+    <!--<item name="colorAccent">@color/colorAccent</item>-->
+    <!--<item name="android:windowNoTitle">true</item>-->
+    <!--</style>-->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- 在去头的同时,还保留高版本的样式主题 -->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
+        <!-- API 11 theme customizations can go here. -->
+    </style>
+
+    <style name="TitleStyle">
+        <!-- 在去头的同时,还保留高版本的样式主题 -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:background">#8866ff00</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>
