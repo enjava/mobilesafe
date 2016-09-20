@@ -48,6 +48,7 @@ public class SplashActivity extends Activity {
     private String versionName;//版本名
     private String versionCode;//版本号
     private String versionDes;//描述
+    //检测是否更新1.0
 
 
     private static final int UPDATE_VERSION = 100;//更新新版本的状态码
