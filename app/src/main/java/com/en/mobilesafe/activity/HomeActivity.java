@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.en.mobilesafe.R;
+import com.en.mobilesafe.utils.ConstantValue;
+import com.en.mobilesafe.utils.SpUtil;
 import com.en.mobilesafe.utils.ToastUtil;
 
 public class HomeActivity extends Activity {
@@ -23,8 +25,11 @@ public class HomeActivity extends Activity {
 
     private String[] mItems = new String[]{"手机防盗", "通讯卫士", "软件管理", "进程管理", "流量统计", "手机杀毒", "缓存清理", "高级工具", "设置中心"};
 
-    private int[] mPics = new int[]{R.mipmap.home_safe, R.mipmap.home_callmsgsafe, R.mipmap.home_apps, R.mipmap.home_taskmanager,
-            R.mipmap.home_netmanager, R.mipmap.home_trojan, R.mipmap.home_sysoptimize, R.mipmap.home_tools, R.mipmap.home_settings};
+    private int[] mPics = new int[]{R.mipmap.home_safe, R.mipmap.home_callmsgsafe,
+            R.mipmap.home_apps, R.mipmap.home_taskmanager,
+            R.mipmap.home_netmanager, R.mipmap.home_trojan,
+            R.mipmap.home_sysoptimize, R.mipmap.home_tools,
+            R.mipmap.home_settings};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,7 @@ public class HomeActivity extends Activity {
                switch (position){
                    case 0:
                        //手机防盗
-                       showPasswordSetDailog();
+                       showPasswordDailog();
                        break;
 
                    case 8:
@@ -53,6 +58,57 @@ public class HomeActivity extends Activity {
 
             }
         });
+    }
+
+    private void showPasswordDailog() {
+        String str=SpUtil.getString(getApplicationContext(),ConstantValue.MOBILE_SAFE_PSD,"");
+        if(TextUtils.isEmpty(str))
+            showPasswordSetDailog();
+        else
+            showPasswordInputDailog(str);
+    }
+
+    private void showPasswordInputDailog(final String savePassword) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final AlertDialog dialog = builder.create();
+
+        View view = View.inflate(this, R.layout.dailog_input_password, null);
+
+        dialog.setView(view);
+
+        final EditText etPassword = (EditText) view.findViewById(R.id.et_password);
+
+        Button btnOK = (Button) view.findViewById(R.id.btn_ok);
+        Button btnCancel = (Button) view.findViewById(R.id.btn_cancel);
+
+        //设置确定事件
+        btnOK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String password=etPassword.getText().toString();
+                String str="";
+                if (TextUtils.isEmpty(password)){
+                    ToastUtil.show(getApplicationContext(),"密码不能为空");
+                }
+                else if (!password.equals(savePassword)){
+
+                        ToastUtil.show(getApplicationContext(),"密码输入不正确,请重新输入");
+                }
+                else {
+
+                    ToastUtil.show(getApplicationContext(),"登录成功");
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 
     private void showPasswordSetDailog() {
@@ -73,7 +129,7 @@ public class HomeActivity extends Activity {
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              String password=etPassword.getText().toString();
+                String password=etPassword.getText().toString();
                 String passwordConfirm=  etPasswordConfirm.getText().toString();
                 String str="";
                 if (TextUtils.isEmpty(password)){
@@ -86,6 +142,8 @@ public class HomeActivity extends Activity {
                         ToastUtil.show(getApplicationContext(),"两次输入密码不一致");
                 }
                 else {
+                    ToastUtil.show(getApplicationContext(),"设置成功");
+                    SpUtil.putString(getApplicationContext(), ConstantValue.MOBILE_SAFE_PSD,password);
                     dialog.dismiss();
                 }
             }
