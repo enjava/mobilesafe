@@ -4,6 +4,10 @@ android {
     compileSdkVersion 22
     buildToolsVersion "24.0.1"
 
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
     defaultConfig {
         applicationId "com.en.mobilesafe"
         minSdkVersion 15

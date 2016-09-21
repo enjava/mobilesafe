@@ -96,7 +96,7 @@ public class HomeActivity extends Activity {
                 }
                 else {
 
-                    ToastUtil.show(getApplicationContext(),"登录成功");
+                    startActivity(new Intent(HomeActivity.this,Setup1Activity.class));
                     dialog.dismiss();
                 }
             }
@@ -142,9 +142,8 @@ public class HomeActivity extends Activity {
                         ToastUtil.show(getApplicationContext(),"两次输入密码不一致");
                 }
                 else {
-                    ToastUtil.show(getApplicationContext(),"设置成功");
                     SpUtil.putString(getApplicationContext(), ConstantValue.MOBILE_SAFE_PSD,password);
-                    dialog.dismiss();
+                    startActivity(new Intent(HomeActivity.this,Setup1Activity.class));
                 }
             }
         });
